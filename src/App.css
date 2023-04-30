@@ -1,3 +1,8 @@
-.container{
-  width: 100%;
+.container-app{
+    max-width: 517px;
+
+    box-sizing: border-box;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
