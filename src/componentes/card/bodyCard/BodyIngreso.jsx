@@ -1,23 +1,12 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-import './Card.css'
-import efectivo from '../assets/efectivo.png'
-import targetaCredito from '../assets/targetacredito.png'
-import transferencia from '../assets/transferencia-movil.png'
+import efectivo from '../../assets/efectivo.png'
+import targetaCredito from '../../assets/targetacredito.png'
+import transferencia from '../../assets/transferencia-movil.png'
 
+function BodyIngreso() {
 
-function Card({title, id, kill=false ,children}) {
-
-  return (
-    <div className="container flex col padding-h box flex-jc-sa card-size" data-id={id}>
-        <div className='margin-b-20 text-titulo'>{title}</div>
-        { children.length && console.log(children.length)}
-        { children.length && children.filter((item, index) => children.length != index)
-                                       .map((item,index) => (<div key={index}>{item}</div>) 
-        )}
-
-
-        {/* <input type="date" name="" id="" className='margin-b-10' />
+    return (
+    <>
+    <input type="date" name="" id="" className='margin-b-10' />
         
         <div className='flex row margin-b-10'>
          <span className='item margin-r-20'>Detalle</span>
@@ -52,15 +41,16 @@ function Card({title, id, kill=false ,children}) {
             </div>
           </div>
         </div>
-         */}
+         
           {/* { kill &&
               <div className='flex row jc-center'>
                   {item}
               </div>
            } */}
-        
-    </div>
+           
+  </>
   )
-}
+        }
 
-export default Card
+
+export default BodyIngreso
