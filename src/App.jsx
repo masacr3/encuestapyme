@@ -12,9 +12,7 @@ function App() {
   return (
     <div className="container-app">
       <Logo />
-      <Gridprovider>
-        <Gridcard title={"Ingresos"}/>
-      </Gridprovider>
+      <Gridcard title={"Ingresos"}/>
     </div>
   )
 }
