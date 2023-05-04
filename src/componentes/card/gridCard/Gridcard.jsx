@@ -7,28 +7,42 @@ import BodyIngreso from "../bodyCard/BodyIngreso"
 
 function Gridcard({title}) {
     const[cards, setCards] = useState([])
+    const[data, setData] = useState([])
 
     const eliminar = (targetDelete) =>{
       let quitar = cards.filter(code => code !== targetDelete)
-      setCards([...quitar])
+      let quitarData = data.filter(item => item.codigo!== targetDelete)
+      setCards(quitar)
+      setData(quitarData)
     }
   
-    const agregarCard = e =>{
+    const agregarCard = () =>{
+      let code = v4()
+      
       let info = {
-        codigo : v4(),
+        codigo : code,
         fecha : "",
-        
+        detalle : "",
+        monto: ""
       }    
-      setCards([... cards, v4()])
+      setData([...data, info])
+      setCards([... cards, code])
+    }
+
+    const mostrar = (datos) =>{
+      console.log(datos)
     }
   
     return (
         <>
-            <button className='margin-b-20' onClick={e=>agregarCard(e)}>Agregar</button>
+            <div className="flex row">
+              <button className='margin-b-20 margin-r-10' onClick={e=>agregarCard(e)}>Agregar</button>
+              <button className='margin-b-20' onClick={()=>mostrar(data)}>MostrarDatos</button>
+            </div>
             { cards.length > 0 && cards.map( code => (
                 <Card title={title} key={code} id={code} kill={true} >
-                    <BodyIngreso />  
-                    <button onClick={e=>eliminar(code)}>Cancelar</button>
+                    <BodyIngreso id={code} datos={data} update={setData}/>  
+                    <button onClick={()=>eliminar(code)}>Cancelar</button>
                 </Card>
             ))
             }

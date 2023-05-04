@@ -5,13 +5,16 @@ import Gridcard from './componentes/card/gridCard/Gridcard'
 import { useState } from 'react'
 import Card from './componentes/card/Card'
 import BodyIngreso from './componentes/card/bodyCard/BodyIngreso'
+import { Gridprovider } from './componentes/gridprovider/Gridprovider'
 
 function App() {
 
   return (
     <div className="container-app">
       <Logo />
-      <Gridcard title={"Ingresos"} cardkill={true} bodycard={<BodyIngreso/>}/>
+      <Gridprovider>
+        <Gridcard title={"Ingresos"}/>
+      </Gridprovider>
     </div>
   )
 }
