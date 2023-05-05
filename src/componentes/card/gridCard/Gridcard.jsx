@@ -10,19 +10,24 @@ function Gridcard({title}) {
     const[data, setData] = useState([])
     const[checking, setChecking] = useState([])
     const[agregar, setAgregar] = useState(true)
+    const[colapsar, setColapsar] = useState([false])
 
     const eliminar = (targetDelete, i) =>{
       let quitar = cards.filter(code => code !== targetDelete)
       let quitarData = data.filter(item => item.codigo!== targetDelete)
       let quitarCheck = checking.filter((item,index)=> index !== i)
+      let quitarColapsar = colapsar.filter((item,index) => index !== i)
       setChecking(quitarCheck)
       setCards(quitar)
       setData(quitarData)
+      setColapsar(quitarColapsar)
       setAgregar(true)
     }
 
     const guardar = (id, index) =>{
       setAgregar(true)
+      let newColapsar = colapsar.map((item,i)=> i === index ? true : item)
+      setColapsar(newColapsar)
     }
   
     const agregarCard = () =>{
@@ -40,6 +45,7 @@ function Gridcard({title}) {
       setCards([... cards, code])
       setChecking([...checking, false])
       setAgregar(false)
+      setColapsar([...colapsar, false])
     }
 
     const mostrar = (datos) =>{
@@ -65,11 +71,16 @@ function Gridcard({title}) {
                               check={checking} 
                               updateCheck={setChecking}
                             />}
+                      data={data[index]}
                       key={code} 
-                      id={code} 
+                      id={code}
+                      index={index} 
                       kill={<button className="margin-r-20" onClick={()=>eliminar(code,index)}>Cancelar</button>}
                       guardar={<button onClick={()=>guardar(code, index)}>Finalizar</button>} 
                       checkdatos={checking[index]} 
+                      colapsar={colapsar}
+                      updatecolapsar={setColapsar}
+                      agregar={setAgregar}
                  />  
               ))
             }

@@ -77,6 +77,13 @@
   font-size: 20px;
   font-weight: 600;
   color: #5C6BC0;
+  padding-bottom: 10px;
+}
+
+.text-resumen{
+  font-size: 16px;
+  font-weight: 500;
+  color: #4c5aa8;
 }
 
 .item{
@@ -114,4 +121,9 @@ button{
 button:hover{
   background-color: #5C6BC0;
   color: #30363d;
+}
+
+.editar-img{
+  width: 30px;
+  height: 32px;
 }

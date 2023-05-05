@@ -9,12 +9,13 @@ import { handlerDetalle, handlerMonto, handlerFecha, handlerOtraFecha, handleTip
 function BodyIngreso({id, datos, update, indexCheck,  check, updateCheck}) {
 
     const imagenes = [efectivo, transferencia, targetaCredito]
+    const data = datos.filter(item => item.codigo === id)[0]
 
-    const[detalle, setDetalle] = useState('')
-    const[monto, setMonto] = useState('')
-    const[fecha, setFecha] = useState('')
-    const[tipoPago, setTipoPago] = useState([false,false,false])
-    const[otraFecha, setOtraFecha] = useState('')
+    const[detalle, setDetalle] = useState(data.detalle)
+    const[monto, setMonto] = useState(data.monto)
+    const[fecha, setFecha] = useState(data.fecha)
+    const[tipoPago, setTipoPago] = useState(data.tipopago)
+    const[otraFecha, setOtraFecha] = useState(data.otrafecha)
 
     const utils = {fecha, detalle, monto, tipoPago, otraFecha, indexCheck, datos, check, id, setDetalle,setMonto,setFecha,setOtraFecha,setTipoPago, update, updateCheck}
 
