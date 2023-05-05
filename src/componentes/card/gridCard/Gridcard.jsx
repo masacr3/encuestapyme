@@ -11,15 +11,17 @@ function Gridcard({title}) {
     const[checking, setChecking] = useState([])
     const[agregar, setAgregar] = useState(true)
 
-    const eliminar = (targetDelete) =>{
+    const eliminar = (targetDelete, i) =>{
       let quitar = cards.filter(code => code !== targetDelete)
       let quitarData = data.filter(item => item.codigo!== targetDelete)
+      let quitarCheck = checking.filter((item,index)=> index !== i)
+      setChecking(quitarCheck)
       setCards(quitar)
       setData(quitarData)
       setAgregar(true)
     }
 
-    const guardar = (id) =>{
+    const guardar = (id, index) =>{
       setAgregar(true)
     }
   
@@ -47,7 +49,8 @@ function Gridcard({title}) {
     return (
         <>
             <div className="flex row">
-              {agregar && 
+              {agregar  && 
+                ( checking.length === 0 || checking.filter(item => item).length > 0 ) && 
                 <button className='margin-b-20 margin-r-10' onClick={e=>agregarCard(e)}>Agregar</button>
               }
               <button className='margin-b-20' onClick={()=>mostrar(data)}>MostrarDatos</button>
@@ -64,8 +67,8 @@ function Gridcard({title}) {
                             />}
                       key={code} 
                       id={code} 
-                      kill={<button className="margin-r-20" onClick={()=>eliminar(code)}>Cancelar</button>}
-                      guardar={<button onClick={()=>guardar(code)}>Finalizar</button>} 
+                      kill={<button className="margin-r-20" onClick={()=>eliminar(code,index)}>Cancelar</button>}
+                      guardar={<button onClick={()=>guardar(code, index)}>Finalizar</button>} 
                       checkdatos={checking[index]} 
                  />  
               ))
