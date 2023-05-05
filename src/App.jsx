@@ -2,17 +2,18 @@
 import './App.css'
 import Logo from './componentes/logo/Logo'
 import Gridcard from './componentes/card/gridCard/Gridcard'
-import { useState } from 'react'
-import Card from './componentes/card/Card'
-import BodyIngreso from './componentes/card/bodyCard/BodyIngreso'
-import { Gridprovider } from './componentes/gridprovider/Gridprovider'
+import { HashRouter, Routes, Route } from 'react-router-dom'
+import Layout from './componentes/layout/Layout'
 
 function App() {
 
   return (
     <div className="container-app">
-      <Logo />
-      <Gridcard title={"Ingresos"}/>
+      <HashRouter>
+        <Routes>
+          <Route path='/' index element={<Layout/>} />
+        </Routes>
+      </HashRouter>
     </div>
   )
 }
