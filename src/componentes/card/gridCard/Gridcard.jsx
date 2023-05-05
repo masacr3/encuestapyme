@@ -8,12 +8,19 @@ import BodyIngreso from "../bodyCard/BodyIngreso"
 function Gridcard({title}) {
     const[cards, setCards] = useState([])
     const[data, setData] = useState([])
+    const[checking, setChecking] = useState([])
+    const[agregar, setAgregar] = useState(true)
 
     const eliminar = (targetDelete) =>{
       let quitar = cards.filter(code => code !== targetDelete)
       let quitarData = data.filter(item => item.codigo!== targetDelete)
       setCards(quitar)
       setData(quitarData)
+      setAgregar(true)
+    }
+
+    const guardar = (id) =>{
+      setAgregar(true)
     }
   
     const agregarCard = () =>{
@@ -22,11 +29,15 @@ function Gridcard({title}) {
       let info = {
         codigo : code,
         fecha : "",
+        otrafecha : "",
         detalle : "",
-        monto: ""
+        monto: "",
+        tipopago : [false, false, false]
       }    
       setData([...data, info])
       setCards([... cards, code])
+      setChecking([...checking, false])
+      setAgregar(false)
     }
 
     const mostrar = (datos) =>{
@@ -36,15 +47,28 @@ function Gridcard({title}) {
     return (
         <>
             <div className="flex row">
-              <button className='margin-b-20 margin-r-10' onClick={e=>agregarCard(e)}>Agregar</button>
+              {agregar && 
+                <button className='margin-b-20 margin-r-10' onClick={e=>agregarCard(e)}>Agregar</button>
+              }
               <button className='margin-b-20' onClick={()=>mostrar(data)}>MostrarDatos</button>
             </div>
-            { cards.length > 0 && cards.map( code => (
-                <Card title={title} key={code} id={code} kill={true} >
-                    <BodyIngreso id={code} datos={data} update={setData}/>  
-                    <button onClick={()=>eliminar(code)}>Cancelar</button>
-                </Card>
-            ))
+            { cards.length > 0 && cards.map( (code, index) => (
+                <Card title={title} 
+                      body={<BodyIngreso 
+                              id={code} 
+                              datos={data} 
+                              update={setData} 
+                              indexCheck={index} 
+                              check={checking} 
+                              updateCheck={setChecking}
+                            />}
+                      key={code} 
+                      id={code} 
+                      kill={<button className="margin-r-20" onClick={()=>eliminar(code)}>Cancelar</button>}
+                      guardar={<button onClick={()=>guardar(code)}>Finalizar</button>} 
+                      checkdatos={checking[index]} 
+                 />  
+              ))
             }
         </>
   )
