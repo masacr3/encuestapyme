@@ -23,6 +23,22 @@
   box-sizing: inherit;
 }
 
+.full-w{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.down{
+  position: fixed;
+  bottom: 10px; 
+  display: flex;
+  justify-content: flex-end;
+}
+
+.min-vh{
+  min-height: 100vh;
+}
+
 .box{
   border: 1px solid #30363d;
   border-radius: 6px;
@@ -40,8 +56,16 @@
   margin-right: 20px;
 }
 
+.margin-r-30{
+  margin-right: 30px;
+}
+
 .margin-b-20{
   margin-bottom: 20px;
+}
+
+.margin-b-100{
+  margin-bottom: 100px;
 }
 
 .margin-b-10{

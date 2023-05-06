@@ -3,7 +3,9 @@
 import { useState } from "react"
 import Card from "../Card"
 import { v4 } from 'uuid' /*genera id aleatorios*/
+import imgAgregar from '../../assets/agregar.png'
 import BodyIngreso from "../bodyCard/BodyIngreso"
+import { animateScroll as scroll } from 'react-scroll'
 
 function Gridcard({title}) {
     const[cards, setCards] = useState([]) //toda la informacion de las cards la vamos a manejar aca
@@ -33,6 +35,8 @@ function Gridcard({title}) {
       else{
         setAgregar(false)
       }
+
+      scroll.scrollToTop()
     }
   
     const crearCard = () =>{
@@ -50,6 +54,8 @@ function Gridcard({title}) {
       }    
       setCards([... cards, info])
       setAgregar(false)
+      
+      scroll.scrollToBottom()
     }
 
     const mostrar = (datos) =>{
@@ -57,12 +63,14 @@ function Gridcard({title}) {
     }
   
     return (
-        <>
-            <div className="flex row">
-              {agregar  
+        <div className="full-w min-vh margin-b-100">
+            {agregar  
                 &&  
-                  <button className='margin-b-20 margin-r-10' onClick={e=>crearCard(e)}>Agregar</button>
+                <div className="down full-w">
+                  <img src={imgAgregar} className='bton-absolute margin-b-20 margin-r-30' onClick={e=>crearCard(e)} />
+                </div>
               }
+            <div className="flex row">
               <button className='margin-b-20' onClick={()=>mostrar(cards)}>MostrarDatos</button>
             </div>
             { cards.length > 0 && cards.map( (card, index) => (
@@ -85,7 +93,7 @@ function Gridcard({title}) {
                    
               ))
             }
-        </>
+        </div>
   )
 }
 

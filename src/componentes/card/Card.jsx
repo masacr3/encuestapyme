@@ -2,13 +2,18 @@
 /* eslint-disable react/prop-types */
 import './Card.css'
 import Lapiz from '../assets/lapiz.png'
+import { useState } from 'react'
 
 
 function Card({title, body, cancelar=null, guardar=null, resumen, cards, updateCards, agregarCard, index}) {
   
+  const[position, setPosition] = useState(window.scrollY)
+
   const editarCard = () => {
     let resumen = { ...cards[index], resumen:false}
     let newCard = cards.map(card => card.codigo === resumen.codigo ? resumen : {...card, resumen: true})
+    console.log("posicion actual", window.scrollY)
+    setPosition(window.scrollY)
     updateCards(newCard)
     agregarCard(false)
   }
