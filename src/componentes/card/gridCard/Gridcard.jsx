@@ -6,46 +6,50 @@ import { v4 } from 'uuid' /*genera id aleatorios*/
 import BodyIngreso from "../bodyCard/BodyIngreso"
 
 function Gridcard({title}) {
-    const[cards, setCards] = useState([])
-    const[data, setData] = useState([])
-    const[checking, setChecking] = useState([])
-    const[agregar, setAgregar] = useState(true)
-    const[colapsar, setColapsar] = useState([false])
+    const[cards, setCards] = useState([]) //toda la informacion de las cards la vamos a manejar aca
+    const[agregar, setAgregar] = useState(true) //es un servicio que da la gridCard
 
-    const eliminar = (targetDelete, i) =>{
-      let quitar = cards.filter(code => code !== targetDelete)
-      let quitarData = data.filter(item => item.codigo!== targetDelete)
-      let quitarCheck = checking.filter((item,index)=> index !== i)
-      let quitarColapsar = colapsar.filter((item,index) => index !== i)
-      setChecking(quitarCheck)
-      setCards(quitar)
-      setData(quitarData)
-      setColapsar(quitarColapsar)
-      setAgregar(true)
+    const eliminarCard = (index) =>{
+      let quitarCard = cards.filter(card => card.codigo !== cards[index].codigo )
+      setCards(quitarCard)
+
+      //pregunta si hay alguna otra targenta por editar
+      if ( quitarCard.length == 0 || quitarCard.filter(card => card.checking).length > 0){
+        setAgregar(true)
+      }
+      else{
+        setAgregar(false)
+      }
     }
 
-    const guardar = (id, index) =>{
-      setAgregar(true)
-      let newColapsar = colapsar.map((item,i)=> i === index ? true : item)
-      setColapsar(newColapsar)
+    const guardarCard = (index) =>{
+      let newCard = { ...cards[index], resumen: true}
+      let resumen = cards.map( card => card.codigo === newCard.codigo ? newCard : card)
+      setCards(resumen)
+
+      if ( resumen.filter(card => card.checking).length > 0){
+        setAgregar(true)
+      }
+      else{
+        setAgregar(false)
+      }
     }
   
-    const agregarCard = () =>{
+    const crearCard = () =>{
       let code = v4()
       
       let info = {
         codigo : code,
         fecha : "",
         otrafecha : "",
-        detalle : "",
-        monto: "",
-        tipopago : [false, false, false]
+        detalle : "coca",
+        monto: "200",
+        tipopago : [false, false, false],
+        checking : false,
+        resumen : false
       }    
-      setData([...data, info])
-      setCards([... cards, code])
-      setChecking([...checking, false])
+      setCards([... cards, info])
       setAgregar(false)
-      setColapsar([...colapsar, false])
     }
 
     const mostrar = (datos) =>{
@@ -55,33 +59,30 @@ function Gridcard({title}) {
     return (
         <>
             <div className="flex row">
-              {agregar  && 
-                ( checking.length === 0 || checking.filter(item => item).length > 0 ) && 
-                <button className='margin-b-20 margin-r-10' onClick={e=>agregarCard(e)}>Agregar</button>
+              {agregar  
+                &&  
+                  <button className='margin-b-20 margin-r-10' onClick={e=>crearCard(e)}>Agregar</button>
               }
-              <button className='margin-b-20' onClick={()=>mostrar(data)}>MostrarDatos</button>
+              <button className='margin-b-20' onClick={()=>mostrar(cards)}>MostrarDatos</button>
             </div>
-            { cards.length > 0 && cards.map( (code, index) => (
-                <Card title={title} 
-                      body={<BodyIngreso 
-                              id={code} 
-                              datos={data} 
-                              update={setData} 
-                              indexCheck={index} 
-                              check={checking} 
-                              updateCheck={setChecking}
-                            />}
-                      data={data[index]}
-                      key={code} 
-                      id={code}
-                      index={index} 
-                      kill={<button className="margin-r-20" onClick={()=>eliminar(code,index)}>Cancelar</button>}
-                      guardar={<button onClick={()=>guardar(code, index)}>Finalizar</button>} 
-                      checkdatos={checking[index]} 
-                      colapsar={colapsar}
-                      updatecolapsar={setColapsar}
-                      agregar={setAgregar}
-                 />  
+            { cards.length > 0 && cards.map( (card, index) => (
+                <Card 
+                  title={title}
+                  key={index} 
+                  body={<BodyIngreso 
+                              index={index}
+                              cards={cards}
+                              updateCards={setCards}
+                        />}
+                  index={index}
+                  resumen={card.resumen}
+                  cards={cards}
+                  updateCards={setCards}
+                  cancelar={<button className="margin-r-20" onClick={()=>eliminarCard(index)}>Cancelar</button>}
+                  guardar={<button onClick={()=>guardarCard(index)}>Guardar</button>}
+                  agregarCard={setAgregar}
+                 />
+                   
               ))
             }
         </>

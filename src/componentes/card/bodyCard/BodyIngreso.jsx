@@ -6,18 +6,14 @@ import targetaCredito from '../../assets/targetacredito.png'
 import transferencia from '../../assets/transferencia-movil.png'
 import { handlerDetalle, handlerMonto, handlerFecha, handlerOtraFecha, handleTipoPago} from './Bodyhandlers'
 
-function BodyIngreso({id, datos, update, indexCheck,  check, updateCheck}) {
+function BodyIngreso({index, cards, updateCards}) {
 
     const imagenes = [efectivo, transferencia, targetaCredito]
-    const data = datos.filter(item => item.codigo === id)[0]
 
-    const[detalle, setDetalle] = useState(data.detalle)
-    const[monto, setMonto] = useState(data.monto)
-    const[fecha, setFecha] = useState(data.fecha)
-    const[tipoPago, setTipoPago] = useState(data.tipopago)
-    const[otraFecha, setOtraFecha] = useState(data.otrafecha)
+    const [bodyData, setBodyData] = useState( cards[index] )
 
-    const utils = {fecha, detalle, monto, tipoPago, otraFecha, indexCheck, datos, check, id, setDetalle,setMonto,setFecha,setOtraFecha,setTipoPago, update, updateCheck}
+    const utils = [ { bodyData : bodyData , setBodyData : setBodyData}, { cards : cards, updateCards : updateCards, index: index} ]
+
 
     return (
             <>
@@ -27,7 +23,7 @@ function BodyIngreso({id, datos, update, indexCheck,  check, updateCheck}) {
                     type="date" 
                     className='margin-b-10'
                     onChange={e=> handlerFecha(e,utils)}
-                    value={fecha}
+                    value={bodyData.fecha}
                   />
               </div>
                 
@@ -37,7 +33,7 @@ function BodyIngreso({id, datos, update, indexCheck,  check, updateCheck}) {
                     type="text" 
                     placeholder='Ingrese detalle'
                     onChange={e=>handlerDetalle(e,utils)}
-                    value={detalle}
+                    value={bodyData.detalle}
                   />
                 </div>
                 
@@ -47,7 +43,7 @@ function BodyIngreso({id, datos, update, indexCheck,  check, updateCheck}) {
                     type="number"
                     placeholder='Ingrese monto'
                     onChange={e => handlerMonto(e,utils)}
-                    value={monto}
+                    value={bodyData.monto}
                   />
                 </div>
                 
@@ -60,7 +56,7 @@ function BodyIngreso({id, datos, update, indexCheck,  check, updateCheck}) {
                             <img src={imagen} alt="" className='card-pay' />
                             <input type="checkbox"
                               className='checkbox-round'
-                              checked={tipoPago[index]}
+                              checked={bodyData.tipopago[index]}
                               onChange={() => handleTipoPago(index,utils)}
                             />
                           </label>
@@ -68,17 +64,17 @@ function BodyIngreso({id, datos, update, indexCheck,  check, updateCheck}) {
                     ))}
                   </div>
                 </div>
-                { tipoPago.at(-1) &&
+                { bodyData.tipopago.at(-1) &&
                   <div className='flex row margin-b-10'>
                     <span className='item margin-r-20'>Targeta Vto</span>
                     <input 
                       type="date" 
                       className='margin-b-10'
                       onChange={e=> handlerOtraFecha(e,utils)}
-                      value={otraFecha}
+                      value={bodyData.otrafecha}
                     />
                   </div>
-                }       
+                }        
           </>
         )
 }

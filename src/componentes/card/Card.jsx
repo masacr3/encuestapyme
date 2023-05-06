@@ -4,35 +4,35 @@ import './Card.css'
 import Lapiz from '../assets/lapiz.png'
 
 
-function Card({title, body, data, index, colapsar,updatecolapsar,agregar, id, kill=null , guardar=null, checkdatos=false}) {
-  let len = 1 + (kill ? 1 : 0 ) + (guardar ? 1 : 0)
+function Card({title, body, cancelar=null, guardar=null, resumen, cards, updateCards, agregarCard, index}) {
   
-  const meCliqueo = () => {
-    agregar(false)
-    let newColapsar = colapsar.map((item,i)=> i === index ? false : item)
-    updatecolapsar(newColapsar)
+  const editarCard = () => {
+    let resumen = { ...cards[index], resumen:false}
+    let newCard = cards.map(card => card.codigo === resumen.codigo ? resumen : {...card, resumen: true})
+    updateCards(newCard)
+    agregarCard(false)
   }
   
   return (
     <>
-      { colapsar[index] && 
-        <div className="container row box card-colapsed" data-id={id} >
-             <div className='margin-r-20 text-resumen'>{data.fecha}</div>
-             <div className='text-resumen'>{data.detalle}</div>
-             <div className='text-resumen'>${data.monto}</div>
-             <img src={Lapiz} className='editar-img' onClick={() => meCliqueo()}/>
+      { resumen && 
+        <div className="container row box card-colapsed" data-id={cards[index].codigo} >
+             <div className='margin-r-20 text-resumen'>{cards[index].fecha}</div>
+             <div className='text-resumen'>{cards[index].detalle}</div>
+             <div className='text-resumen'>${cards[index].monto}</div>
+             <img src={Lapiz} className='editar-img' onClick={() => editarCard()}/>
         </div>
 
       }
       {
-        !colapsar[index] &&
-          <div className="container flex col padding-h box flex-jc-sa card-size" data-id={id}>
+        !resumen &&
+          <div className="container flex col padding-h box flex-jc-sa card-size" data-id={cards[index].codigo}>
             <div className='margin-b-20 text-titulo'>{title}</div>
               { body }
-              { (kill || guardar) &&
+              { cancelar &&
                  <div className='flex row jc-center'>
-                 { kill && kill }
-                  { guardar && checkdatos &&  guardar}
+                 { cancelar }
+                 { guardar && cards[index].checking &&  guardar}
                 </div>
               }
           </div>
