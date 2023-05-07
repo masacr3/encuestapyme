@@ -1,0 +1,46 @@
+.ContainerGrid{
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.ContainerBtonFlotante{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.BtonFlotante{
+    width: 100%;
+    position: fixed;
+    bottom: 10px; 
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .BtonAgregar{
+    margin-bottom: 20px;
+    margin-right: 30px;
+  }
+
+  .BtonEliminar{
+    margin-right: 20px;
+  }
+
+  .TitleGrid{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .TitleGridTitle{
+    padding-left: 20px;
+  }
+
+  .TitleGridGuardar{
+    margin-right: 20px;
+  }
+
+  .NoData{
+    text-align: center;
+  }

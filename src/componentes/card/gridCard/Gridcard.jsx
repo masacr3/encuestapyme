@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState } from "react"
+import {ContainerGrid,ContainerBtonFlotante, BtonFlotante, BtonAgregar,BtonEliminar, TitleGrid, TitleGridTitle, TitleGridGuardar, NoData} from './Gridcard.module.css'
 import Card from "../Card"
 import { v4 } from 'uuid' /*genera id aleatorios*/
 import imgAgregar from '../../assets/agregar.png'
@@ -63,11 +64,11 @@ function Gridcard({title}) {
     }
   
     return (
-        <div className="full-w  margin-b-100">
+        <div className={ContainerBtonFlotante}>
             {agregar  
                 &&  
-                <div className="down full-w">
-                  <img src={imgAgregar} className='bton-absolute margin-b-20 margin-r-30' onClick={e=>crearCard(e)} />
+                <div className={BtonFlotante}>
+                  <img src={imgAgregar} className={BtonAgregar} onClick={e=>crearCard(e)} />
                 </div>
               }
             {/* <div className="flex row">
@@ -76,13 +77,13 @@ function Gridcard({title}) {
             
             
             { cards.length > 0 &&
-              <div className="flex row flex-jc-sb align-center">
-                <p className="padding-l-20">Items</p>
-                <button className="margin-r-20">Guardar</button>
+              <div className={TitleGrid}>
+                <p className={TitleGridTitle}>Items</p>
+                <button className={TitleGridGuardar}>Guardar</button>
               </div>
             }            
-            <div className="box padding-10">
-                { cards.length === 0 && <p className="text-center">Sin datos</p>}
+            <div className={ContainerGrid}>
+                { cards.length === 0 && <p className={NoData}>Sin datos</p>}
                 { cards.length > 0 && cards.map( (card, index) => (
                     <Card 
                       title={title}
@@ -96,7 +97,7 @@ function Gridcard({title}) {
                       resumen={card.resumen}
                       cards={cards}
                       updateCards={setCards}
-                      cancelar={<button className="margin-r-20" onClick={()=>eliminarCard(index)}>Cancelar</button>}
+                      cancelar={<button className={BtonEliminar} onClick={()=>eliminarCard(index)}>Cancelar</button>}
                       guardar={<button onClick={()=>guardarCard(index)}>Guardar</button>}
                       agregarCard={setAgregar}
                     />
