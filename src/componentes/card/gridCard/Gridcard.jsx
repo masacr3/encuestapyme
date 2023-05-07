@@ -36,7 +36,7 @@ function Gridcard({title}) {
         setAgregar(false)
       }
 
-      scroll.scrollToTop()
+      scroll.scrollToBottom()
     }
   
     const crearCard = () =>{
@@ -46,8 +46,8 @@ function Gridcard({title}) {
         codigo : code,
         fecha : "",
         otrafecha : "",
-        detalle : "coca",
-        monto: "200",
+        detalle : "",
+        monto: "",
         tipopago : [false, false, false],
         checking : false,
         resumen : false
@@ -63,16 +63,16 @@ function Gridcard({title}) {
     }
   
     return (
-        <div className="full-w min-vh margin-b-100">
+        <div className="full-w  margin-b-100">
             {agregar  
                 &&  
                 <div className="down full-w">
                   <img src={imgAgregar} className='bton-absolute margin-b-20 margin-r-30' onClick={e=>crearCard(e)} />
                 </div>
               }
-            <div className="flex row">
+            {/* <div className="flex row">
               <button className='margin-b-20' onClick={()=>mostrar(cards)}>MostrarDatos</button>
-            </div>
+            </div> */}
             { cards.length > 0 && cards.map( (card, index) => (
                 <Card 
                   title={title}

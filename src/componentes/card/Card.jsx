@@ -3,6 +3,7 @@
 import './Card.css'
 import Lapiz from '../assets/lapiz.png'
 import { useState } from 'react'
+import Modal from '../modal/Modal'
 
 
 function Card({title, body, cancelar=null, guardar=null, resumen, cards, updateCards, agregarCard, index}) {
@@ -31,7 +32,8 @@ function Card({title, body, cancelar=null, guardar=null, resumen, cards, updateC
       }
       {
         !resumen &&
-          <div className="container flex col padding-h box flex-jc-sa card-size" data-id={cards[index].codigo}>
+        <Modal>
+          <div className="container flex col padding-h box flex-jc-sa card-size box-shadow solid-color" data-id={cards[index].codigo}>
             <div className='margin-b-20 text-titulo'>{title}</div>
               { body }
               { cancelar &&
@@ -41,6 +43,7 @@ function Card({title, body, cancelar=null, guardar=null, resumen, cards, updateC
                 </div>
               }
           </div>
+        </Modal>
       }
     </>
   )
