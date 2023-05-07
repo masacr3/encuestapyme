@@ -73,26 +73,37 @@ function Gridcard({title}) {
             {/* <div className="flex row">
               <button className='margin-b-20' onClick={()=>mostrar(cards)}>MostrarDatos</button>
             </div> */}
-            { cards.length > 0 && cards.map( (card, index) => (
-                <Card 
-                  title={title}
-                  key={index} 
-                  body={<BodyIngreso 
-                              index={index}
-                              cards={cards}
-                              updateCards={setCards}
-                        />}
-                  index={index}
-                  resumen={card.resumen}
-                  cards={cards}
-                  updateCards={setCards}
-                  cancelar={<button className="margin-r-20" onClick={()=>eliminarCard(index)}>Cancelar</button>}
-                  guardar={<button onClick={()=>guardarCard(index)}>Guardar</button>}
-                  agregarCard={setAgregar}
-                 />
-                   
-              ))
-            }
+            
+            
+            { cards.length > 0 &&
+              <div className="flex row flex-jc-sb align-center">
+                <p className="padding-l-20">Items</p>
+                <button className="margin-r-20">Guardar</button>
+              </div>
+            }            
+            <div className="box padding-10">
+                { cards.length === 0 && <p className="text-center">Sin datos</p>}
+                { cards.length > 0 && cards.map( (card, index) => (
+                    <Card 
+                      title={title}
+                      key={index} 
+                      body={<BodyIngreso 
+                                  index={index}
+                                  cards={cards}
+                                  updateCards={setCards}
+                            />}
+                      index={index}
+                      resumen={card.resumen}
+                      cards={cards}
+                      updateCards={setCards}
+                      cancelar={<button className="margin-r-20" onClick={()=>eliminarCard(index)}>Cancelar</button>}
+                      guardar={<button onClick={()=>guardarCard(index)}>Guardar</button>}
+                      agregarCard={setAgregar}
+                    />
+                      
+                  ))
+                }
+             </div>
         </div>
   )
 }
