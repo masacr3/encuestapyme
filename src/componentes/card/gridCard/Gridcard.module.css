@@ -35,8 +35,9 @@
     padding-left: 20px;
   }
 
-  .TitleGridGuardar{
+  .TitleGridEliminar{
     margin-right: 20px;
+    width: 150px;
   }
 
   .NoData{

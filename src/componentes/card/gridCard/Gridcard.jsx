@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from "react"
-import {ContainerGrid,ContainerBtonFlotante, BtonFlotante, BtonAgregar,BtonEliminar, TitleGrid, TitleGridTitle, TitleGridGuardar, NoData} from './Gridcard.module.css'
+import { useEffect, useState } from "react"
+import {ContainerGrid,ContainerBtonFlotante, BtonFlotante, BtonAgregar,BtonEliminar, TitleGrid, TitleGridTitle, TitleGridEliminar, NoData} from './Gridcard.module.css'
 import Card from "../Card"
 import { v4 } from 'uuid' /*genera id aleatorios*/
 import imgAgregar from '../../assets/agregar.png'
@@ -11,6 +11,13 @@ import { animateScroll as scroll } from 'react-scroll'
 function Gridcard({title}) {
     const[cards, setCards] = useState([]) //toda la informacion de las cards la vamos a manejar aca
     const[agregar, setAgregar] = useState(true) //es un servicio que da la gridCard
+
+    useEffect(() => {
+      const items = JSON.parse(localStorage.getItem('data-ingreso'));
+      if (items) {
+       setCards(items);
+      }
+    }, []);
 
     const eliminarCard = (index) =>{
       let quitarCard = cards.filter(card => card.codigo !== cards[index].codigo )
@@ -29,6 +36,7 @@ function Gridcard({title}) {
       let newCard = { ...cards[index], resumen: true}
       let resumen = cards.map( card => card.codigo === newCard.codigo ? newCard : card)
       setCards(resumen)
+      guardarDatos(resumen)
 
       if ( resumen.filter(card => card.checking).length > 0){
         setAgregar(true)
@@ -45,10 +53,10 @@ function Gridcard({title}) {
       
       let info = {
         codigo : code,
-        fecha : "20",
-        otrafecha : "dada",
-        detalle : "dada",
-        monto: "123",
+        fecha : "",
+        otrafecha : "",
+        detalle : "",
+        monto: "",
         tipopago : [false, false, false],
         checking : false,
         resumen : false
@@ -59,10 +67,18 @@ function Gridcard({title}) {
       scroll.scrollToBottom()
     }
 
-    const mostrar = (datos) =>{
-      console.log(datos)
+    function guardarDatos(datos){
+      localStorage.setItem('data-ingreso', JSON.stringify(datos))
+
+      let datosGuardados = JSON.parse(localStorage.getItem('data-ingreso'))
+      console.log("Esta data se guardo",datosGuardados)
     }
-  
+
+    function eliminarDatos(){
+      localStorage.clear()
+      setCards([])
+    }
+
     return (
         <div className={ContainerBtonFlotante}>
             {agregar  
@@ -71,15 +87,11 @@ function Gridcard({title}) {
                   <img src={imgAgregar} className={BtonAgregar} onClick={e=>crearCard(e)} />
                 </div>
               }
-            {/* <div className="flex row">
-              <button className='margin-b-20' onClick={()=>mostrar(cards)}>MostrarDatos</button>
-            </div> */}
-            
             
             { cards.length > 0 &&
               <div className={TitleGrid}>
                 <p className={TitleGridTitle}>Items</p>
-                <button className={TitleGridGuardar}>Guardar</button>
+                <button className={TitleGridEliminar} onClick={eliminarDatos}>Eliminar datos</button>
               </div>
             }            
             <div className={ContainerGrid}>
