@@ -1,0 +1,50 @@
+.Container, .ContainerCheck{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.ContainerCheck{
+    justify-content: space-around;
+    align-items: center;
+}
+
+.TextItem{
+    color: #5C6BC0;
+    font-weight: 600;
+    margin-right: 20px;
+}
+
+.Checkbox {
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 50%;
+    background-color: #db526d6d;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.Checkbox:checked {
+    background-color: #4412fb;
+}
+
+.Pay{
+    width: 40px;
+    height: 40px;
+}
+
+.Row{
+    display: flex;
+    flex-direction: row;
+}
+
+.Mr10{
+    margin-right: 10px;
+}
+
+.Mb10{
+    margin-bottom: 10px;
+}

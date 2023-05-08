@@ -5,6 +5,9 @@ import efectivo from '../../assets/efectivo.png'
 import targetaCredito from '../../assets/targetacredito.png'
 import transferencia from '../../assets/transferencia-movil.png'
 import { handlerDetalle, handlerMonto, handlerFecha, handlerOtraFecha, handleTipoPago} from './Bodyhandlers'
+import {Container, ContainerCheck, Checkbox, Pay, Row, Mr10, Mb10, TextItem} from './BodyIngreso.module.css'
+
+
 
 function BodyIngreso({index, cards, updateCards}) {
 
@@ -17,18 +20,17 @@ function BodyIngreso({index, cards, updateCards}) {
 
     return (
             <>
-              <div className='flex row margin-b-10'>
-                <span className='item margin-r-20'>Fecha</span>
+              <div className={Container}>
+                <span className={TextItem}>Fecha</span>
                   <input 
                     type="date" 
-                    className='margin-b-10'
                     onChange={e=> handlerFecha(e,utils)}
                     value={bodyData.fecha}
                   />
               </div>
                 
-                <div className='flex row margin-b-10'>
-                <span className='item margin-r-20'>Detalle</span>
+              <div className={Container}>
+                <span className={TextItem}>Detalle</span>
                   <input 
                     type="text" 
                     placeholder='Ingrese detalle'
@@ -37,8 +39,8 @@ function BodyIngreso({index, cards, updateCards}) {
                   />
                 </div>
                 
-                <div className='flex row margin-b-10'>
-                  <span className='item margin-r-20'>Monto</span>
+                <div className={Container}>
+                  <span className={TextItem}>Monto</span>
                   <input 
                     type="number"
                     placeholder='Ingrese monto'
@@ -47,15 +49,15 @@ function BodyIngreso({index, cards, updateCards}) {
                   />
                 </div>
                 
-                <div className='flex row margin-b-10 flex-jc-sa align-center'>
-                  <span className='item'>Tipo pago</span>
-                  <div className="flex row">
+                <div className={ContainerCheck}>
+                  <span className={TextItem}>Tipo pago</span>
+                  <div className={Row}>
                     {imagenes.length && imagenes.map((imagen, index) =>(
                         <div key={index}>
-                          <label className='margin-r-10'>
-                            <img src={imagen} alt="" className='card-pay' />
+                          <label className={Mr10}>
+                            <img src={imagen} alt="" className={Pay} />
                             <input type="checkbox"
-                              className='checkbox-round'
+                              className={Checkbox}
                               checked={bodyData.tipopago[index]}
                               onChange={() => handleTipoPago(index,utils)}
                             />
@@ -65,11 +67,11 @@ function BodyIngreso({index, cards, updateCards}) {
                   </div>
                 </div>
                 { bodyData.tipopago.at(-1) &&
-                  <div className='flex row margin-b-10'>
-                    <span className='item margin-r-20'>Targeta Vto</span>
+                  <div className={Container}>
+                    <span className={TextItem}>Targeta Vto</span>
                     <input 
                       type="date" 
-                      className='margin-b-10'
+                      className={Mb10}
                       onChange={e=> handlerOtraFecha(e,utils)}
                       value={bodyData.otrafecha}
                     />

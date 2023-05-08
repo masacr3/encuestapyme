@@ -45,10 +45,10 @@ function Gridcard({title}) {
       
       let info = {
         codigo : code,
-        fecha : "",
-        otrafecha : "",
-        detalle : "",
-        monto: "",
+        fecha : "20",
+        otrafecha : "dada",
+        detalle : "dada",
+        monto: "123",
         tipopago : [false, false, false],
         checking : false,
         resumen : false
