@@ -9,6 +9,7 @@
 
 .BtonFlotante{
     width: 100%;
+    max-width: 517px;
     position: fixed;
     bottom: 10px; 
     display: flex;
@@ -43,3 +44,21 @@
   .NoData{
     text-align: center;
   }
+
+  .NoScroll{
+    overflow-y: hidden;
+  }
+
+  @media only screen
+  and (min-device-width : 530px){
+    .BtonFlotante{
+      width: 100%;
+      max-width: 650px;
+      position: fixed;
+      bottom: 50vh; 
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import {ContainerCard, ContainerResumen, ContainerBton, Titulo, TextResumen, Imagen} from './Card.module.css'
+import {ContainerCard, ContainerResumen, ContainerBton, Titulo, TextResumen, Imagen, Noscroll} from './Card.module.css'
 import Lapiz from '../assets/lapiz.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Modal from '../modal/Modal'
 
 

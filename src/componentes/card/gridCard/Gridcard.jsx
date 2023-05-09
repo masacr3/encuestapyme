@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react"
-import {ContainerGrid,ContainerBtonFlotante, BtonFlotante, BtonAgregar,BtonEliminar, TitleGrid, TitleGridTitle, TitleGridEliminar, NoData} from './Gridcard.module.css'
+import {ContainerGrid,ContainerBtonFlotante, BtonFlotante, BtonAgregar,BtonEliminar, TitleGrid, TitleGridTitle, TitleGridEliminar, NoData, NoScroll} from './Gridcard.module.css'
 import Card from "../Card"
 import { v4 } from 'uuid' /*genera id aleatorios*/
 import imgAgregar from '../../assets/agregar.png'
@@ -30,6 +30,8 @@ function Gridcard({title}) {
       else{
         setAgregar(false)
       }
+
+      document.body.style.overflowY = "auto"
     }
 
     const guardarCard = (index) =>{
@@ -46,6 +48,7 @@ function Gridcard({title}) {
       }
 
       scroll.scrollToBottom()
+      document.body.style.overflowY = "auto"
     }
   
     const crearCard = () =>{
@@ -65,6 +68,7 @@ function Gridcard({title}) {
       setAgregar(false)
       
       scroll.scrollToBottom()
+      document.body.style.overflowY = "hidden"
     }
 
     function guardarDatos(datos){
