@@ -6,7 +6,8 @@ import { useEffect, useState } from "react"
 import React from 'react'
 
 export const useGridCardHooks = () => {
-  console.log("me dibujo otra vez :)");
+  
+    console.log("me dibujo otra vez :)");
     const[cards, setCards] = useState([]) //toda la informacion de las cards la vamos a manejar aca
     const[agregar, setAgregar] = useState(true) //es un servicio que da la gridCard
     
