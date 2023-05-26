@@ -9,7 +9,7 @@ import {Container, ContainerCheck, Checkbox, Pay, Row, Mr10, Mb10, TextItem} fro
 
 
 
-function BodyIngreso({index, cards, updateCards}) {
+function BodyEgresos({index, cards, updateCards}) {
 
     const imagenes = [efectivo, transferencia, targetaCredito]
 
@@ -20,6 +20,7 @@ function BodyIngreso({index, cards, updateCards}) {
 
     return (
             <>
+            <h1>esto es el bodycard Egresos</h1>
               <div className={Container}>
                 <span className={TextItem}>Fecha</span>
                   <input 
@@ -82,4 +83,4 @@ function BodyIngreso({index, cards, updateCards}) {
 }
 
 
-export default BodyIngreso
+export default BodyEgresos

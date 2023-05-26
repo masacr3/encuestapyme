@@ -30,7 +30,7 @@ function Card({title, body, cancelar=null, guardar=null, resumen, cards, updateC
 
       }
       {
-        !resumen &&
+        !resumen && 
         <Modal>
           <div className={ContainerCard} data-id={cards[index].codigo}>
             <div className={Titulo}>{title}</div>
