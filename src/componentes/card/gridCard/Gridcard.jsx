@@ -11,7 +11,7 @@ import BodyEgresos from '../bodyCard/BodyEgresos'
 
 function Gridcard({title}) {
 
-  const {cards, setCards, agregar, setAgregar, eliminarCard,guardarCard,crearCard,eliminarDatos} = useGridCardHooks();
+  const {ingresoCards, setIngresoCards, egresoCards, setEgresoCards ,agregar, setAgregar, eliminarCard,guardarCard,crearCard,eliminarDatos} = useGridCardHooks();
     
   
 
@@ -23,33 +23,33 @@ function Gridcard({title}) {
         {agregar  
             &&  
             <div className={BtonFlotante}>
-              <img src={imgAgregar} className={BtonAgregar} onClick={e=>crearCard(e)} />
+              <img src={imgAgregar} className={BtonAgregar} onClick={() => crearCard({title})} />
             </div>
           }
         
-        { cards.length > 0 &&
+        { ingresoCards.length > 0 &&
           <div className={TitleGrid}>
             <p className={TitleGridTitle}>Items</p>
-            <button className={TitleGridEliminar} onClick={eliminarDatos}>Eliminar datos</button>
+            <button className={TitleGridEliminar} onClick={eliminarDatos({title})}>Eliminar datos</button>
           </div>
         }            
         <div className={ContainerGrid}>
-            { cards.length === 0 && <p className={NoData}>Sin datos</p>}
-            { cards.length > 0 && cards.map( (card, index) => (
+            { ingresoCards.length === 0 && <p className={NoData}>Sin datos</p>}
+            { ingresoCards.length > 0 && ingresoCards.map( (card, index) => (
                 <Card 
                   title={title}
                   key={index} 
                   body={<BodyIngreso 
                               index={index}
-                              cards={cards}
-                              updateCards={setCards}
+                              cards={ingresoCards}
+                              updateCards={setIngresoCards}
                         />}
                   index={index}
-                  resumen={card.resumen}
-                  cards={cards}
-                  updateCards={setCards}
-                  cancelar={<button className={BtonEliminar} onClick={()=>eliminarCard(index)}>Cancelar</button>}
-                  guardar={<button onClick={()=>guardarCard(index)}>Guardar</button>}
+                  resumen={ingresoCards.resumen}
+                  cards={ingresoCards}
+                  updateCards={setIngresoCards}
+                  cancelar={<button className={BtonEliminar} onClick={()=>eliminarCard(index, {title})}>Cancelar</button>}
+                  guardar={<button onClick={()=>guardarCard(index, {title})}>Guardar</button>}
                   agregarCard={setAgregar}
                 />
                   
@@ -61,37 +61,37 @@ function Gridcard({title}) {
       ( 
         
         <div className={ContainerBtonFlotante}>
-          <h1> esto es el gridcard</h1>
+          <h1> esto22 es el gridcardx</h1>
         {agregar  
             &&  
             <div className={BtonFlotante}>
-              <img src={imgAgregar} className={BtonAgregar} onClick={e=>crearCard(e)} />
+              <img src={imgAgregar} className={BtonAgregar} onClick={()=>crearCard({title})} />
             </div>
           }
         
-        { cards.length > 0 &&
+        { egresoCards.length > 0 &&
           <div className={TitleGrid}>
             <p className={TitleGridTitle}>Items</p>
-            <button className={TitleGridEliminar} onClick={eliminarDatos}>Eliminar datos</button>
+            <button className={TitleGridEliminar} onClick={eliminarDatos({title})}>Eliminar datos</button>
           </div>
         }            
         <div className={ContainerGrid}>
-            { cards.length === 0 && <p className={NoData}>Sin datos</p>}
-            { cards.length > 0 && cards.map( (card, index) => (
+            { egresoCards.length === 0 && <p className={NoData}>Sin datos</p>}
+            { egresoCards.length > 0 && egresoCards.map( (card, index) => (
                 <Card 
                   title={title}
                   key={index} 
                   body={<BodyEgresos 
                               index={index}
-                              cards={cards}
-                              updateCards={setCards}
+                              cards={egresoCards}
+                              updateCards={setEgresoCards}
                         />}
                   index={index}
-                  resumen={card.resumen}
-                  cards={cards}
-                  updateCards={setCards}
-                  cancelar={<button className={BtonEliminar} onClick={()=>eliminarCard(index)}>Cancelar</button>}
-                  guardar={<button onClick={()=>guardarCard(index)}>Guardar</button>}
+                  resumen={egresoCards.resumen}
+                  cards={egresoCards}
+                  updateCards={setEgresoCards}
+                  cancelar={<button className={BtonEliminar} onClick={()=>eliminarCard(index, {title})}>Cancelar</button>}
+                  guardar={<button onClick={()=>guardarCard(index,{title})}>Guardar</button>}
                   agregarCard={setAgregar}
                 />
                   

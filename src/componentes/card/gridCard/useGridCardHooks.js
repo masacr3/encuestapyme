@@ -7,26 +7,49 @@ import React from 'react'
 
 export const useGridCardHooks = () => {
   
-    console.log("me dibujo otra vez :)");
-    const[cards, setCards] = useState([]) //toda la informacion de las cards la vamos a manejar aca
-    const[agregar, setAgregar] = useState(true) //es un servicio que da la gridCard
-    
-       
+    const [ingresoCards, setIngresoCards] = useState([]); //toda la informacion de las cards de INGRESOS la vamos a manejar aca
+    const [egresoCards, setEgresoCards] = useState([]); //toda la informacion de las cards de EGRESOS la vamos a manejar aca
 
+    //const[cards, setCards] = useState([]) 
+    const[agregar, setAgregar] = useState(true) //es un servicio que da la gridCard
+
+    
+    console.log("me dibujo otra vez :)");
     
         useEffect(() => {
             const items = JSON.parse(localStorage.getItem('data-ingreso'));
             if (items) {
-             setCards(items);
+             setIngresoCards(items);
+            }
+          }, []);
+
+          useEffect(() => {
+            const items = JSON.parse(localStorage.getItem('data-egreso'));
+            if (items) {
+             setEgresoCards(items);
             }
           }, []);
     
   
         
     
-        const eliminarCard = (index) =>{
-          let quitarCard = cards.filter(card => card.codigo !== cards[index].codigo )
-          setCards(quitarCard)
+        const eliminarCard = (index,title) =>{
+          if(title === 'Ingresos'){
+            let quitarCard = ingresoCards.filter(card => card.codigo !== cards[index].codigo )
+          setIngresoCards(quitarCard)
+    
+          //pregunta si hay alguna otra targenta por editar
+          if ( quitarCard.length == 0 || quitarCard.filter(card => card.checking).length > 0){
+            setAgregar(true)
+          }
+          else{
+            setAgregar(false)
+          }
+    
+          document.body.style.overflowY = "auto"
+        } else if (title == 'Egresos') {
+          let quitarCard = egresoCards.filter(card => card.codigo !== cards[index].codigo )
+          setEgresoCards(quitarCard)
     
           //pregunta si hay alguna otra targenta por editar
           if ( quitarCard.length == 0 || quitarCard.filter(card => card.checking).length > 0){
@@ -38,11 +61,16 @@ export const useGridCardHooks = () => {
     
           document.body.style.overflowY = "auto"
         }
+          }
+          
     
-        const guardarCard = (index) =>{
-          let newCard = { ...cards[index], resumen: true}
-          let resumen = cards.map( card => card.codigo === newCard.codigo ? newCard : card)
-          setCards(resumen)
+        const guardarCard = (index,title) =>{
+    
+          if(title == 'Ingresos'){
+
+          let newCard = { ...ingresoCards[index], resumen: true}
+          let resumen = ingresoCards.map( card => card.codigo === newCard.codigo ? newCard : card)
+          setIngresoCards(resumen)
           guardarDatos(resumen)
     
           if ( resumen.filter(card => card.checking).length > 0){
@@ -54,11 +82,28 @@ export const useGridCardHooks = () => {
     
           scroll.scrollToBottom()
           document.body.style.overflowY = "auto"
+          } else if (title == 'Egresos'){
+
+            let newCard = { ...egresoCards[index], resumen: true}
+          let resumen = egresoCards.map( card => card.codigo === newCard.codigo ? newCard : card)
+          setEgresosCards(resumen)
+          guardarDatos(resumen)
+    
+          if ( resumen.filter(card => card.checking).length > 0){
+            setAgregar(true)
+          }
+          else{
+            setAgregar(false)
+          }
+    
+          scroll.scrollToBottom()
+          document.body.style.overflowY = "auto"
+          }
         }
       
-        const crearCard = () =>{
+        const crearCard = (title) =>{
           let code = v4()
-          
+          console.log(title)
           let info = {
             codigo : code,
             fecha : "",
@@ -68,28 +113,51 @@ export const useGridCardHooks = () => {
             tipopago : [false, false, false],
             checking : false,
             resumen : false
-          }    
-          setCards([... cards, info])
-          setAgregar(false)
+          }
+          if(title == 'Ingresos'){
+            setIngresoCards([... ingresoCards, info])
+            setAgregar(false)
+          } else if (title == 'Egresos'){
+            setEgresoCards([... egresoCards, info])
+            setAgregar(false)
+          }   
           
           scroll.scrollToBottom()
           document.body.style.overflowY = "hidden"
         }
     
-        function guardarDatos(datos){
-          localStorage.setItem('data-ingreso', JSON.stringify(datos))
-    
-          let datosGuardados = JSON.parse(localStorage.getItem('data-ingreso'))
-          console.log("Esta data se guardo",datosGuardados)
+        function guardarDatos(datos, title){
+          
+          if(title == 'Ingresos'){
+
+            localStorage.setItem('data-ingreso', JSON.stringify(datos))
+
+          } else if (title == 'Egresos'){
+
+            localStorage.setItem('data-egreso', JSON.stringify(datos))
+          }  
+          let datosGuardadosIngreso = JSON.parse(localStorage.getItem('data-ingreso'))
+          console.log("Esta data se guardo",datosGuardadosIngreso)
+
+          let datosGuardadosEgresos = JSON.parse(localStorage.getItem('data-ingreso'))
+          console.log("Esta data se guardo",datosGuardadosEgresos)
         }
     
-        function eliminarDatos(){
-          localStorage.clear()
-          setCards([])
+        function eliminarDatos(title){
+          
+          if(title == 'Ingresos'){
+            localStorage.clear()
+            setIngresoCards([])
+          } else if (title == 'Egresos'){
+            localStorage.clear()
+            setEgresoCards([])
+          }  
+          
         }
     
         return {
-            cards, setCards,
+            ingresoCards, setIngresoCards,
+            egresoCards, setEgresoCards,
             agregar, setAgregar,
             eliminarCard,
             guardarCard,
