@@ -46,7 +46,12 @@ function Gridcard({title}) {
                       cancelar={<button className={BtonEliminar} onClick={()=>eliminarCard(index)}>Cancelar</button>}
                       guardar={<button onClick={()=>guardarCard(index)}>Guardar</button>}
                       agregarCard={setAgregar}
+
+
+                      
                     />
+
+                    
                       
                   ))
                 }
