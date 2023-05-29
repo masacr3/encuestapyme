@@ -1,3 +1,12 @@
+.logout{
+  color: salmon;
+}
+.user-name{
+  margin-top: 30px;
+  color: salmon;
+  align-items: center;
+}
+
 .tab-bar {
     position: fixed;
     top: 10px;
@@ -68,6 +77,13 @@
     color: #333;
     padding: 12px;
     transition: background-color 0.3s ease;
+  }
+  .tab-user{
+    text-decoration: none;
+    color: #333;
+    padding: 12px;
+    margin-top:10px;
+    color: salmon;
   }
   
   .tab:hover {
