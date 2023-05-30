@@ -1,5 +1,5 @@
 import '../../App.css'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, HashRouter } from 'react-router-dom'
 import { LayoutRoutes } from '../layout/LayoutRoutes'
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
@@ -8,14 +8,18 @@ import { LoginPage } from '../../auth/pages/LoginPage'
 export const AppRouter = () => {
   return (
     <div className="container-app">
-      
+      <HashRouter>
         <Routes>
 
           <Route path="/login" element={
             <PublicRoute>
-              <LoginPage/>
+              
+                    <LoginPage />
+              
             </PublicRoute>
           }/>
+
+
 
 
           <Route path="/*" element={
@@ -26,7 +30,7 @@ export const AppRouter = () => {
           
           
           </Routes>
-      
+          </HashRouter>
     </div>
   )
 }

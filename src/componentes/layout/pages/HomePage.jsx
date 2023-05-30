@@ -9,7 +9,7 @@ export const HomePage = () => {
   const { logged } = useContext( AuthContext );
   return (
     <>
-    {!logged && <Navigate to="/login" />}
+    {/* {!logged && <Navigate to="/login" />} */}
     <TabBar/>
     <h2>Home:</h2>
     </>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 //LOGOUT
 import { useContext } from 'react';
-import { NavLink, useNavigate, Link } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../auth/context/AuthContext';
 
 
@@ -27,7 +27,12 @@ const TabBar = () => {
 
     const onLogout = () => {
         logout();
-        navigate('/login');
+
+        navigate('/login', {
+            replace: true
+        });
+
+        
     }
 
 
@@ -45,7 +50,7 @@ const TabBar = () => {
             
 
             <div className='tab-user'>{ user?.name } </div>
-            <button className= "tab" onClick={ e => onLogout() }>
+            <button className= "tab" onClick={ onLogout }>
               <div className='logout'>
                   Logout 
               </div>
